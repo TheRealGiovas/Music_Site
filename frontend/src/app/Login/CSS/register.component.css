@@ -1,0 +1,24 @@
+
+.field-form{
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+.error{
+    background-color: #fff0f0;
+}
+
+.card{
+    width: 500px;
+    margin-top:5%;
+    margin-left:28%;
+}
+
+
+
+.login-form{
+    display: block;
+    padding: 0;
+    margin: 0;
+}
