@@ -1,0 +1,33 @@
+.products-page-container{
+    margin: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.search-column{
+    margin: 50px;
+}
+
+.search-box{
+    margin-bottom: 80px;
+}
+.filters{
+    
+    margin-top: 40px;
+}
+
+.product-link{
+    color: black;
+}
+
+.product-price{
+    font-size: 18px;
+    color: #EAC009;
+}
+.product-info{
+    margin: 10px;
+    width:300px;
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,0 +1,35 @@
+<mat-card class="product-detail-container">
+    <mat-card-content class="product-detail">
+
+        <div class="row1">
+            <img src={{this.product.image}} width="600px"/>
+            <h1>{{this.product.name}}</h1>
+            <p>{{this.product.description}}</p>
+        </div>
+
+        <div class="row2">
+
+                <h2>Características</h2>
+
+                <ul>
+                    <li *ngFor="let caracteristic of this.product.caracteristics">{{caracteristic}}</li>
+                    
+                </ul>
+            <br>
+            <br>
+            <p class="price"><b>{{this.product.price}}</b></p>
+            <br>
+            <br>
+            <div class="Comprar">
+                <button mat-raised-button color="warn" href="https://www.google.com/" >Comprar</button>
+            </div>  
+                <br>
+            <div class="Comprar">
+                <button mat-raised-button color="accent" href="https://www.google.com/" >Agregar al Carrito</button>
+            </div>
+
+        </div>
+
+
+    </mat-card-content>
+  </mat-card>

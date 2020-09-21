@@ -1,0 +1,24 @@
+
+.search-box-container{
+    background-color:white;
+    width: 300px;
+    
+}
+
+.search-box-container input{
+    width: 300px;
+    height: 30px;
+    
+}
+
+.childs{
+    border: 1px solid black;
+    width: 295px;
+    padding: 5px;
+
+}
+.childs a{
+
+    color: black;
+
+}

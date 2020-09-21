@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
   template: ` <div style="text-align: center;"> 
                 
                     <login-form> </login-form> 
-                    
+
   
               </div>`
 

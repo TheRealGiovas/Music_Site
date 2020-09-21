@@ -8,7 +8,8 @@ import {BannerComponent} from './banner.component';
     <mat-toolbar color="primary"> <nav-section style="width:100%"> </nav-section></mat-toolbar>
     <banner-component>a</banner-component>
     </div>
-    `
+    `,
+    styleUrls:['./nav.component.css']
 })
 
 export  class NavComponent{

@@ -1,0 +1,29 @@
+.product-detail-container{
+    margin: 50px;
+    height: 500px;
+}
+
+.row2 h2{
+    font-size: 26px;
+}
+
+.row1 h1{
+    font-size: 30px;
+}
+
+.row2{
+    align-self: flex-start;
+}
+.product-detail{
+    align-items: center;
+    margin: 50px;
+    height: 500px;
+    display: flex;
+    justify-content: space-around;   
+}
+
+
+.price{
+    font-size: 25px;
+    color:#EAC009 ;
+}

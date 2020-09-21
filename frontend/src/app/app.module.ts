@@ -18,7 +18,22 @@ import {NavSectionComponent} from './Nav/nav.section.component';
 import {SearchBarComponent} from './Nav/search.bar.component';
 import {AuthService} from './auth.service';
 import {RouterModule} from '@angular/router';
+import {NgbCarousel} from '@ng-bootstrap/ng-bootstrap/';
 
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {Ng2SearchPipeModule } from 'ng2-search-filter';
+
+import {searchBox} from './Pages/products/Components/search-box.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+
+
+
+
+
+import {productsPage} from './Pages/products/products.page.component';
+
+
+import {productDetailPage} from './Pages/product-detail/product-detail.page.component';
 
 import {LandingPage} from './Pages/landing.component';
 
@@ -54,7 +69,14 @@ var routes =[
       NavSectionComponent,
       SearchBarComponent,
       LoginComponent,
+      productsPage,
 
+
+      NgbCarousel,
+      searchBox,
+
+      
+      productDetailPage,
       LoginPage,
       LandingPage,
       RegisterPage
@@ -71,6 +93,11 @@ var routes =[
       MatToolbarModule,
       FormsModule,
       ReactiveFormsModule,
+      Ng2SearchPipeModule,
+      MatCheckboxModule,
+      MatGridListModule,
+
+      
 
       RouterModule.forRoot(routes)
       ],

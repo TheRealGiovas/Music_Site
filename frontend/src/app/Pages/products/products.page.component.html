@@ -1,0 +1,62 @@
+ <div class="products-page-container">
+       <div class="search-column" >
+           
+            <div>
+                <mat-card>
+                    <mat-card-content>  
+                        <form class="input-form">     
+                            <mat-form-field>
+                                <mat-label>Buscar...</mat-label>
+                                <input matInput placeholder="Buscar..." value="">
+                            </mat-form-field>
+                        </form>
+                    </mat-card-content>
+                </mat-card> 
+            </div>
+
+            <div class="filters">
+                <mat-card>
+                    <mat-card-content>
+                      <h2 class="example-h2">Checkbox configuration</h2>
+                  
+                      <section class="example-section">
+                        <mat-checkbox class="example-margin" [(ngModel)]="checked">Checked</mat-checkbox>
+                      </section>
+                  
+                      <br>
+
+                      <section class="example-section">
+                        <mat-checkbox class="example-margin" [(ngModel)]="disabled">Disabled</mat-checkbox>
+                      </section>
+                    </mat-card-content>
+                  </mat-card>
+            </div>
+        </div>
+        
+        <div style="width: 70%; height: 100%;">
+            <mat-card> 
+            <mat-card-content>
+            <div class="col-md-12">
+                <mat-grid-list cols="2" rowHeight="2:1">
+                    <mat-grid-tile 
+                    *ngFor="let product of this.products">
+                            <div>
+                                    <img class="tile-image"
+                                    width="70%"
+                                    height="50%"
+                                    src={{product.ImageUrl}}/>
+                                <br>
+                                    <div class="product-info">
+                                        <a href={{product.url}} class="product-link"><b>{{product.name}}</b></a>
+                                        <p class="product-price"><b>{{ product.price}}</b></p>
+                                    </div>
+                            </div>
+                    
+                        </mat-grid-tile>
+                           
+                        </mat-grid-list>
+                    </div>
+            </mat-card-content>
+        </mat-card> 
+        </div>
+    </div>
