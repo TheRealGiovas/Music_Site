@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var shop = express();
 var auth = express();
 var jwt =require('jsonwebtoken');
 //Body-parser se tiene que instalar
@@ -47,7 +48,6 @@ auth.post('/register',(req,res)=>{
     res.json({ "user":req.body.firstName, "token": token});
 });
 
-
 auth.post('/login',(req,res)=>{
     //esto le permite al usuario mantener su sesión cada vez que el compa se registra y cambia de pagina.
     //la idea es que aqui se envia la info del usuario a la base de datos y se genera un token que le da al usuario una sesion,
@@ -67,13 +67,28 @@ auth.post('/login',(req,res)=>{
     res.json({ "user":req.body.email, "token": token});
 });
 
+shop.get('/Id/:productId',(req, res)=>{
+    
+     console.log(req.params.productId);
+ 
+     res.json({
+         name:"Guitarra",
+         image:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg",
+         description:"Con la nueva guitarra chingona acá perrona yu know beibi",
+         caracteristics:["Es roja","Es chingona","Suena perrón"],
+         price:"$1500"
+       });
+ });
 
+
+
+
+
+
+ 
 app.use('/api',api);
-
 app.use('/auth', auth);
-
-
-
+app.use('/product', shop);
 
 
 app.listen(63145);

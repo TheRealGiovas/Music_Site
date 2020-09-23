@@ -46,6 +46,12 @@ var routes =[
   path:'',
   component:LandingPage
   },
+  
+  {
+    path:'product/:id',
+    component:LandingPage
+  },
+
   {
     path:'register',
     component:RegisterPage

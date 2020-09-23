@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Http} from '@angular/http';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'product-detail-page',
@@ -7,27 +10,37 @@ import { Component } from '@angular/core';
 })
  
 export class productDetailPage{
- 
-  product;
+  
+  id = this.r.snapshot.paramMap.get('id');
 
-  DOMAIN = "http://localhost:4200/";
+  product:json;
 
-    constructor(){
+  DOMAIN = "http://localhost:63145/product";
+
+    constructor(private r:ActivatedRoute, private http:Http){
         
-        this.product={
+       
+        /*{
           name:"Guitarra",
           image:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg",
           description:"Con la nueva guitarra chingona acá perrona yu know beibi",
           caracteristics:["Es roja","Es chingona","Suena perrón"],
           price:"$1500"
-        }
+        }*/
+
+    }
+    
+    //
+    //Inicializa el la variable de manera sincrona con el servidor
+    //
+
+    ngOnInit(){
+      let resp = this.http.get(this.DOMAIN+"/Id/"+this.id);
+      resp.subscribe((data)=> this.product = data.json());
     }
 
     
-    async getProduct(){
-      //accedemos al objeto http que le pasamos arriba
-     return response.json();
-    }
+
 
 }
 
