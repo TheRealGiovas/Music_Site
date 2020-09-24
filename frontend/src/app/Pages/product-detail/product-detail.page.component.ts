@@ -25,11 +25,11 @@ export class productDetailPage{
           image:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg",
           description:"Con la nueva guitarra chingona acá perrona yu know beibi",
           caracteristics:["Es roja","Es chingona","Suena perrón"],
-          price:"$1500"
+          price:"1500"
         }*/
 
     }
-    
+
     //
     //Inicializa el la variable de manera sincrona con el servidor
     //

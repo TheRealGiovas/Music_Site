@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
- 
+import {Http} from '@angular/http';
+import {MatSelectModule} from '@angular/material/select';
+
+
 @Component({
   selector: 'products-page',
   templateUrl: "./products.page.component.html",
@@ -7,15 +10,27 @@ import { Component } from '@angular/core';
 })
  
 export class productsPage {
- imagenUrl: string = "https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg";
- products: json[] = [
-     new json({name:"piano", ImageUrl: this.imagenUrl, url:"", price: 10 }) ,
-     new json({name:"guitarra", ImageUrl:this.imagenUrl, url:"", price: 10 }) ,
+  
+ //imagenUrl: string = "https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg";
+ products: json[]
+
+ DOMAIN = "http://localhost:63145/product/all";
+
+ /* = [
+     new json() ,
+     new json() ,
      new json({name:"electric", ImageUrl:this.imagenUrl, url:"", price: 10 }) ,
      new json({name:"bateria", ImageUrl:this.imagenUrl, url:"" , price: 10}) ]
-
-    constructor(){
+*/
+    constructor(private http:Http){
         
+    }
+
+    ngOnInit(){
+      let resp = this.http.get(this.DOMAIN);
+      resp.subscribe((data)=>{
+         this.products = data.json().array;
+    });
     }
 
 }
@@ -23,15 +38,16 @@ export class productsPage {
 
 class json  {
   name: string;
-  url:string;
   ImageUrl: string;
   price: string
+  productUrl:string
+
+  
   constructor(obj){
     this.name = obj.name;
-    this.url = obj.url;
     this.ImageUrl =obj.ImageUrl;
-    this.url=obj.url;
     this.price = obj.price;
+    this.productUrl = obj.productUrl;
   }
   
 }

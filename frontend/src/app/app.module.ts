@@ -19,6 +19,9 @@ import {SearchBarComponent} from './Nav/search.bar.component';
 import {AuthService} from './auth.service';
 import {RouterModule} from '@angular/router';
 import {NgbCarousel} from '@ng-bootstrap/ng-bootstrap/';
+import {MatSelectModule} from '@angular/material/select';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatRadioModule} from '@angular/material/radio';
 
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -44,7 +47,7 @@ import {RegisterPage} from './Pages/registerPage.component';
 var routes =[
   {
   path:'',
-  component:LandingPage
+  component:productsPage
   },
   
   {
@@ -102,8 +105,9 @@ var routes =[
       Ng2SearchPipeModule,
       MatCheckboxModule,
       MatGridListModule,
-
-      
+      MatSelectModule,
+      MatChipsModule,
+      MatRadioModule,
 
       RouterModule.forRoot(routes)
       ],

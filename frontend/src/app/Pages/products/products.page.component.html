@@ -17,16 +17,62 @@
             <div class="filters">
                 <mat-card>
                     <mat-card-content>
-                      <h2 class="example-h2">Checkbox configuration</h2>
-                  
+                      <h2 class="example-h2">Instrumentos por tipo</h2>
                       <section class="example-section">
-                        <mat-checkbox class="example-margin" [(ngModel)]="checked">Checked</mat-checkbox>
-                      </section>
-                  
+                        <mat-form-field appearance="fill">
+                            <mat-label>Tipo de Instrumento</mat-label>
+                            <mat-select [(value)]="selected">
+                              <mat-option value="Cuerda">Cuerda</mat-option>
+                              <mat-option value="Percusion">Percusión</mat-option>
+                              <mat-option value="Viento">Viento</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          
+                          <p>You selected: {{selected}}</p>
+
+
+
+                          <br>
+
+                      <h2 class="example-h2">Populares</h2>
+
+                      <mat-chip-list aria-label="Fish selection">
+                          <mat-chip>One fish</mat-chip>
+                          
+                          <mat-chip>Two fish</mat-chip>
+                          <mat-chip color="primary" selected>Primary fish</mat-chip>
+                          <mat-chip color="accent" selected>Accent fish</mat-chip>
+                      </mat-chip-list>
+
+
                       <br>
 
-                      <section class="example-section">
-                        <mat-checkbox class="example-margin" [(ngModel)]="disabled">Disabled</mat-checkbox>
+
+
+                     
+
+                       
+                          <br>
+
+                          <h2 class="example-h2">Filtrar por precio</h2>
+                          <div style="margin:50px;">
+                            <mat-radio-group aria-label="Select an option" >
+                                <mat-radio-button value="1" style="margin:0;">De 0 a 2,000</mat-radio-button>
+                                <br>
+                                <br>
+                                <br>
+                                <mat-radio-button value="2" style="margin:0;">Más de 2,000 a 5,000</mat-radio-button>
+                                <br>
+                                <br>
+                                <br>
+                                <mat-radio-button value="2" style="margin:0;">Más de 5,000</mat-radio-button>
+                            </mat-radio-group>
+                         </div>
+                                                    
+
+                          
+
+
                       </section>
                     </mat-card-content>
                   </mat-card>
@@ -47,7 +93,7 @@
                                     src={{product.ImageUrl}}/>
                                 <br>
                                     <div class="product-info">
-                                        <a href={{product.url}} class="product-link"><b>{{product.name}}</b></a>
+                                        <a href={{product.productUrl}} class="product-link"><b>{{product.name}}</b></a>
                                         <p class="product-price"><b>{{ product.price}}</b></p>
                                     </div>
                             </div>
