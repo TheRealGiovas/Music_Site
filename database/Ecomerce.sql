@@ -4,12 +4,10 @@ create table usuario(
 	usuario_id INT NOT NULL AUTO_INCREMENT unique,
     usuario_name VARCHAR(45) NOT NULL,
     usuario_mail VARCHAR(50) NOT NULL,
+    usuario_password varchar(50) not null,
     usuario_adress VARCHAR(100) NOT NULL,
     
-    usuario_numtarjeta varchar(16) not null,
-    usuario_cvv varchar(3) not null,
-    usuario_venc varchar(4) not null,
-    usuario_nomtarjeta varchar(100) not null, 
+    
     
     primary key(usuario_id)
 );
@@ -20,7 +18,8 @@ create table stock(
     product_date varchar(4) not null,
     product_description varchar(2000),
     product_price double not null,
-    
+    product_image blob null,
+    product_image_url varchar(200) null,
 	primary key(product_id)
 );
 
@@ -37,3 +36,6 @@ create table pedido(
     foreign key(usuario_id) references usuario(usuario_id)
 );
 
+drop table pedido;
+drop table usuario;
+drop table stock;
