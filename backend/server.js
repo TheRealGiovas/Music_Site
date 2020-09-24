@@ -136,6 +136,52 @@ Esta API obtiene el id de la ruta y busca el producto de la base de datos al que
 
 */
 
+/*
+ESTA PARTE TE TOCA A TI MARTÍN,
+
+Esto es más complejo, la idea es definir una api que devuelva un array de Jsons con la información de todos y cada uno de los articulos
+encontrados en la base de datos. la ruta va a ser:
+
+"product/all"
+
+
+Checa que envíe el array y has todos los cambios que creas necesarios en la vista para que funcione.
+
+*/
+
+shop.get('/all',(req, res)=>{
+    
+    //
+    //1.- Checa que se haya enviado el Id y que este exista en la base de datos
+    //
+    
+
+    //
+    //2.- Luego toma la información, la pasa a un json y se la envia al usuario como con el ejemplo
+    //
+    // console.log(req.params.productId);
+    
+    console.log([
+        {name:"piano",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg"
+    },
+        {name:"guitarra",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg"},
+        {name:"electric", url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg" },
+        {name:"bateria",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg" }
+     ]);
+
+     res.json({
+         "array":[
+            {name:"piano",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1"},
+            {name:"guitarra",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1"},
+            {name:"electric", url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1" },
+            {name:"bateria",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1"}
+         ]
+       });
+ });
+
+
+
+
 shop.get('/Id/:productId',(req, res)=>{
     
     //
@@ -165,18 +211,10 @@ shop.get('/Id/:productId',(req, res)=>{
 
 
 
-/*
-ESTA PARTE TE TOCA A TI MARTÍN,
-
-Esto es más complejo, la idea es definir una api que devuelva un array de Jsons con la información de todos y cada uno de los articulos
-encontrados en la base de datos. la ruta va a ser:
-
-"product/all"
 
 
-Checa que envíe el array y has todos los cambios que creas necesarios en la vista para que funcione.
 
-*/
+
 
 
 
