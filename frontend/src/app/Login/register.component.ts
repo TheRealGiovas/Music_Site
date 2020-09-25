@@ -25,6 +25,7 @@ export class Register {
                 firstName:['',Validators.required],
                 lastName:['',Validators.required],
                 email:['',[Validators.required,emailValid()]],
+                direccion:['',Validators.required],
                 password:['',Validators.required],
                 confirmPassword:['',Validators.required],
             },

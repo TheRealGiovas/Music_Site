@@ -18,6 +18,15 @@
             <input matInput [ngClass]="{'error':isValid('email')}" type="email" mdInput placeholder="Email"  formControlName="email">
         </mat-form-field>
 
+
+        
+        <mat-form-field class="field-form">
+            <mat-label>Dirección</mat-label>
+            <input matInput [ngClass]="{'error':isValid('direccion')}"  placeholder="direccion"  formControlName="direccion">
+        </mat-form-field>
+
+
+
         <mat-form-field class="field-form">
             <mat-label>Contraseña</mat-label>
             <input matInput [ngClass]="{'error':isValid('password')}" type="password" mdInput placeholder="Confirm Password" formControlName="password">

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FormBuilder, Validator, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
 import {Http} from '@angular/http';
 
 
@@ -13,23 +13,33 @@ import {Http} from '@angular/http';
 
 export class productsPage {
   
- //imagenUrl: string = "https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg";
- productsAll:json[]
+  productsAll:json[]
  
  products: json[]
+ 
+ term;
+ 
+ DOMAIN:string;
 
- DOMAIN = "http://localhost:63145/product/all";
-
- filterInformation:JSON = JSON.parse('{ "caracteristica":[], "priceMin": 0, "priceMax":10000000}');
+ filterInformation:JSON = JSON.parse('{ "caracteristicas":[], "priceMin": 0, "priceMax":10000000}');
  
 
- constructor(private http:Http){
-
+ constructor(private http:Http, private r:ActivatedRoute,){
+  
+ 
+ this.term = this.r.snapshot.paramMap.get('term');
+ this.DOMAIN = "http://localhost:63145/products/"+ this.term;
 
 }
 
+//
+//El metodo search redirecciona al usuario a esta misma pagina pero le dice al servidor que le pase los objetos que hagan
+//match con lo que hay en la base de datos
+//
+
+
     search(keyword){
-      window.location.href = "http://localhost:63145/product/"+keyword;
+      window.location.href = "http://localhost:4200/products/"+keyword;
     }
 
 
@@ -40,15 +50,15 @@ export class productsPage {
       //
       if(filtro.caracteristica != null){
 
-        if(this.filterInformation['caracteristica'].includes(filtro.caracteristica)){
+        if(this.filterInformation['caracteristicas'].includes(filtro.caracteristica)){
           
-          this.filterInformation['caracteristica'] =
-          this.filterInformation['caracteristica'].filter(word => word != filtro.caracteristica);
+          this.filterInformation['caracteristicas'] =
+          this.filterInformation['caracteristicas'].filter(word => word != filtro.caracteristica);
 
 
         }else{
 
-          this.filterInformation['caracteristica'].push(filtro.caracteristica);
+          this.filterInformation['caracteristicas'].push(filtro.caracteristica);
 
         }
       }
@@ -66,35 +76,61 @@ export class productsPage {
         
       }
       
-      
-      alert(this.filterInformation['caracteristica'][0]);
-
       //
       //Basado en el objeto filter va a modificar el elemento all
       //
 
       var tmp = [];
 
-      for(var j =0;j < this.productsAll.length;j++){
+
+      if(this.filterInformation['caracteristicas'].length ==0 ){
+
+        for(var j =0;j < this.productsAll.length;j++){
         
-        let element = this.productsAll[j];
-
-        console.log(element);
-
-        for(var i =0;i < this.filterInformation['caracteristica'].length;i++){
-
-          let e = this.filterInformation['caracteristica'][i];
-
-          if(element.caracteristicas.includes(e) &&
-           (element.price < this.filterInformation["priceMax"] && element.price >= this.filterInformation['priceMin'])){
-            tmp.push(element);
-          }
+          let element = this.productsAll[j];
+  
+  
+            if(
+             (element.price < this.filterInformation["priceMax"] && element.price >= this.filterInformation['priceMin'])){
+              tmp.push(element);
+            }
+          
+  
         }
+        
+  
+      this.products = tmp;
+        
+      }else{
+
+        for(var j =0;j < this.productsAll.length;j++){
+        
+          let element = this.productsAll[j];
+  
+          console.log(element);
+  
+          for(var i =0;i < this.filterInformation['caracteristicas'].length;i++){
+  
+            let e = this.filterInformation['caracteristicas'][i];
+  
+            if(element.caracteristicas.includes(e) &&
+             (element.price < this.filterInformation["priceMax"] && element.price >= this.filterInformation['priceMin'])){
+              tmp.push(element);
+            }
+          }
+  
+        }
+        
+  
+      this.products = tmp;
+
 
       }
-     // tmp.forEach(a=>alert(a.name));
+
+
+
       
-      this.products = tmp;
+
 
 
     }

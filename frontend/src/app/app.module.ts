@@ -47,12 +47,16 @@ import {RegisterPage} from './Pages/registerPage.component';
 var routes =[
   {
   path:'',
-  component:productsPage
+  component:LandingPage
   },
   
   {
     path:'product/:id',
-    component:LandingPage
+    component:productDetailPage
+  },
+  {
+    path:'products/:term',
+    component:productsPage
   },
 
   {
