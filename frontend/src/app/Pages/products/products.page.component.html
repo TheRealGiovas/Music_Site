@@ -6,12 +6,13 @@
                     <mat-card-content>  
                         <form class="input-form">     
                             <mat-form-field>
-                                <mat-label>Buscar...</mat-label>
-                                <input matInput placeholder="Buscar..." value="">
+                                <mat-label>Buscador</mat-label>
+                                <input matInput placeholder="Buscar..."  #buscador (keyup.enter)="search(buscador.value)"> 
                             </mat-form-field>
                         </form>
                     </mat-card-content>
                 </mat-card> 
+            
             </div>
 
             <div class="filters">
@@ -21,7 +22,7 @@
                       <section class="example-section">
                         <mat-form-field appearance="fill">
                             <mat-label>Tipo de Instrumento</mat-label>
-                            <mat-select [(value)]="selected">
+                            <mat-select [(value)]="selected" (selectionChange)="filter({'caracteristica': selected})">
                               <mat-option value="Cuerda">Cuerda</mat-option>
                               <mat-option value="Percusion">Percusión</mat-option>
                               <mat-option value="Viento">Viento</mat-option>
@@ -35,14 +36,24 @@
                           <br>
 
                       <h2 class="example-h2">Populares</h2>
+                    
 
-                      <mat-chip-list aria-label="Fish selection">
-                          <mat-chip>One fish</mat-chip>
-                          
-                          <mat-chip>Two fish</mat-chip>
-                          <mat-chip color="primary" selected>Primary fish</mat-chip>
-                          <mat-chip color="accent" selected>Accent fish</mat-chip>
-                      </mat-chip-list>
+
+                      <section class="example-section">
+                        <mat-checkbox class="example-margin"  (change)="filter({'caracteristica': 'Piano'})">Pianos</mat-checkbox>
+                        <br>
+                        <br>
+                        <mat-checkbox class="example-margin"  (change)="filter({'caracteristica': 'Guitarra_Electrica'})">Guitarras Electricas</mat-checkbox>
+                        <br>
+                        <br>
+                        <mat-checkbox class="example-margin" (change)="filter({'caracteristica': 'Guitarra_Acustica'})">Guitarras Acusticas</mat-checkbox>
+                        <br>
+                        <br>
+                        <mat-checkbox class="example-margin"  (change)="filter({'caracteristica': 'Accesorios'})">Accesorios</mat-checkbox>
+                        
+
+                      </section>
+
 
 
                       <br>
@@ -55,19 +66,19 @@
                           <br>
 
                           <h2 class="example-h2">Filtrar por precio</h2>
-                          <div style="margin:50px;">
-                            <mat-radio-group aria-label="Select an option" >
-                                <mat-radio-button value="1" style="margin:0;">De 0 a 2,000</mat-radio-button>
+                          
+                            <mat-radio-group aria-label="Select an option"  >
+                                <mat-radio-button value="1" style="margin:0;" (change)="filter({'priceMin': 0, 'priceMax':2000})">De 0 a 2,000</mat-radio-button>
                                 <br>
                                 <br>
                                 <br>
-                                <mat-radio-button value="2" style="margin:0;">Más de 2,000 a 5,000</mat-radio-button>
+                                <mat-radio-button value="2" style="margin:0;" (change)="filter({'priceMin': 2000, 'priceMax':5000})">Más de 2,000 a 5,000</mat-radio-button>
                                 <br>
                                 <br>
                                 <br>
-                                <mat-radio-button value="2" style="margin:0;">Más de 5,000</mat-radio-button>
+                                <mat-radio-button value="2" style="margin:0;" (change)="filter({'priceMin': 5000, 'priceMax':1000000000})"> Más de 5,000</mat-radio-button>
                             </mat-radio-group>
-                         </div>
+                        
                                                     
 
                           
@@ -79,7 +90,7 @@
             </div>
         </div>
         
-        <div style="width: 70%; height: 100%;">
+        <div style="width: 70%; height: 100%; margin-top: 50px;">
             <mat-card> 
             <mat-card-content>
             <div class="col-md-12">
@@ -87,14 +98,15 @@
                     <mat-grid-tile 
                     *ngFor="let product of this.products">
                             <div>
+                                
                                     <img class="tile-image"
                                     width="70%"
                                     height="50%"
                                     src={{product.ImageUrl}}/>
                                 <br>
                                     <div class="product-info">
-                                        <a href={{product.productUrl}} class="product-link"><b>{{product.name}}</b></a>
-                                        <p class="product-price"><b>{{ product.price}}</b></p>
+                                        <a href={{product.productUrl}} class="product-link"><b>{{product.name}}</b></a> <b>{{ product.price}}</b>
+                                        
                                     </div>
                             </div>
                     

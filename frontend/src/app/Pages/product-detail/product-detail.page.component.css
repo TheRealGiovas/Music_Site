@@ -20,10 +20,21 @@
     height: 500px;
     display: flex;
     justify-content: space-around;   
+
 }
 
 
 .price{
     font-size: 25px;
     color:#EAC009 ;
+}
+
+.product-link{
+    display: inline-block;
+margin-right: 20px;
+}
+
+
+.product-info{
+    font-size: 25px;
 }

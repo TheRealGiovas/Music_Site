@@ -6,9 +6,9 @@ import { Component } from '@angular/core'
     template: `
         <div class="banner">
             <div class="links">
-                <a href="url" style="color: white; ">Guitarras</a>
-                <a href="url" style="color: white;">Accesorios</a>
-                <a href="url" style="color: white;">Pianos</a>
+                <a href="product/guitarra" style="color: white; ">Guitarras</a>
+                <a href="product/accesorio" style="color: white;">Accesorios</a>
+                <a href="product/piano" style="color: white;">Pianos</a>
             </div>
         </div>
     `,
