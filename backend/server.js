@@ -14,6 +14,8 @@ var bodyParser = require('body-parser');
 var app = express();
 var shop = express();
 var auth = express();
+var catalog = express();
+
 
 
 //
@@ -136,52 +138,6 @@ Esta API obtiene el id de la ruta y busca el producto de la base de datos al que
 
 */
 
-/*
-ESTA PARTE TE TOCA A TI MARTÍN,
-
-Esto es más complejo, la idea es definir una api que devuelva un array de Jsons con la información de todos y cada uno de los articulos
-encontrados en la base de datos. la ruta va a ser:
-
-"product/all"
-
-
-Checa que envíe el array y has todos los cambios que creas necesarios en la vista para que funcione.
-
-*/
-
-shop.get('/all',(req, res)=>{
-    
-    //
-    //1.- Checa que se haya enviado el Id y que este exista en la base de datos
-    //
-    
-
-    //
-    //2.- Luego toma la información, la pasa a un json y se la envia al usuario como con el ejemplo
-    //
-    // console.log(req.params.productId);
-    
-    console.log([
-        {name:"piano",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg"
-    },
-        {name:"guitarra",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg"},
-        {name:"electric", url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg" },
-        {name:"bateria",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg" }
-     ]);
-
-     res.json({
-         "array":[
-            {name:"piano",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["Piano"]},
-            {name:"Guitarra_Electrica",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["Guitarra_Electrica"]},
-            {name:"acustic", url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1",caracteristicas:["acustic"] },
-            {name:"bateria",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["bateria"]}
-         ]
-       });
- });
-
-
-
-
 shop.get('/Id/:productId',(req, res)=>{
     
     //
@@ -202,6 +158,124 @@ shop.get('/Id/:productId',(req, res)=>{
          price:"1500"
        });
  });
+
+
+
+
+
+
+/*
+ESTA PARTE TE TOCA A TI MARTÍN,
+
+
+Definir una api que devuelva un array de Jsons con la información de todos y cada uno de los articulos
+encontrados en la base de datos. la ruta va a ser:
+
+Es para la vista de "/products"
+
+
+
+*/
+
+catalog.get('/all',(req, res)=>{
+    
+    //
+    //1.- Toma toda la información de la base de datos
+    //
+    
+
+    //
+    //2.- Luego le da el formato del ejemplo a cada objeto JSON formado a partir de los registros de la base de datos
+    //
+
+    
+
+
+    /*
+    ES IMPORTANTE QUE CADA UNO DE LOS OBJETOS QUE MANDES TENGA LAS PROPIEDADES:
+    name,price,ImageUrl,productUrl,caracteristicas
+
+    IGUAL QUE COMO SE ESPECIFICA EN EL EJEMPLO DE ABAJO.
+
+    LA PROPIEDAD CARACTERISTICAS, ES UN ARRAY DE STRINGS EN DONDE VIENEN KEYWORDS CORRESPONDIENTES A CADA OBJETO
+    */
+
+     res.json({
+         "array":[
+            {name:"piano",  price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["Piano"]},
+            {name:"Guitarra_Electrica",   price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["Guitarra_Electrica"]},
+            {name:"acustic",price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1",caracteristicas:["acustic"] },
+            {name:"bateria", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["bateria"]}
+         ]
+       });
+ });
+
+
+
+
+
+
+
+
+ 
+/*
+ESTA PARTE TE TOCA A TI MARTÍN,
+
+
+Definir una api que devuelva un array de Jsons con la información de todos y cada uno de los articulos
+encontrados en de la base de datos QUE COINCIDAN DE ALGÚNA FORMA CON EL "TERM" MANDADO POR PARAMETRO EN LA RUTA
+
+Ejemplo:
+El usuario escribe:
+
+http://localhost:4200/products/guitarra
+
+Encontonces tu le devuelves un array con todos los objetos que coincidan con "guitarra", ya sea las que tengan guitarra en el name, o en caracteristicas,
+o en algún otro lugar.
+
+*/
+ catalog.get('/:term',(req, res)=>{
+    
+    //
+    //1.- Tomas el "term" que haya escrito el usuario en la ruta 
+    //
+    
+
+    //
+    //2.- Luego checas que registros  contienen ese "term" en la base de datos y lo pasas a un array de JSONs
+    //
+    //
+
+    
+
+    //
+    //finalmente se lo envías al usuario como en el ejemplo de abajo
+    //
+
+    /*
+    ES IMPORTANTE QUE CADA UNO DE LOS OBJETOS QUE MANDES TENGA LAS PROPIEDADES:
+    name,price,ImageUrl,productUrl,caracteristicas
+
+    IGUAL QUE COMO SE ESPECIFICA EN EL EJEMPLO DE ABAJO.
+
+    LA PROPIEDAD CARACTERISTICAS, ES UN ARRAY DE STRINGS EN DONDE VIENEN KEYWORDS CORRESPONDIENTES A CADA OBJETO
+    */
+     res.json({
+         "array":[
+            {name:"piano",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["Piano"]},
+            {name:"Guitarra_Electrica",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["Guitarra_Electrica"]},
+            {name:"acustic", url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1",caracteristicas:["acustic"] },
+            {name:"bateria",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["bateria"]}
+         ]
+       });
+ });
+
+
+
+
+
+
+
 
 
 
@@ -244,6 +318,7 @@ shop.get('/Id/:productId',(req, res)=>{
 app.use('/api',api);
 app.use('/auth', auth);
 app.use('/product', shop);
+app.use('/products', catalog);
 
 
 app.listen(63145);
