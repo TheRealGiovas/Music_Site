@@ -171,10 +171,10 @@ shop.get('/all',(req, res)=>{
 
      res.json({
          "array":[
-            {name:"piano",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1"},
-            {name:"guitarra",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1"},
-            {name:"electric", url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1" },
-            {name:"bateria",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1"}
+            {name:"piano",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["Piano"]},
+            {name:"Guitarra_Electrica",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["Guitarra_Electrica"]},
+            {name:"acustic", url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1",caracteristicas:["acustic"] },
+            {name:"bateria",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["bateria"]}
          ]
        });
  });
