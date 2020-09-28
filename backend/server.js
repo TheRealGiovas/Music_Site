@@ -5,7 +5,8 @@
 var express = require('express');
 var jwt =require('jsonwebtoken');
 var bodyParser = require('body-parser');
-
+var mysql = require('mysql');
+const popupS = require('popups');
 
 
 //
@@ -15,6 +16,17 @@ var app = express();
 var shop = express();
 var auth = express();
 var catalog = express();
+
+
+
+var connection = mysql.createConnection({
+    host: "127.0.0.1",
+    user: "root",
+    password: "123456",
+    database: "Ecomerce",
+    insecureAuth : true
+});
+
 
 
 
@@ -54,10 +66,66 @@ o algo así).
 
 auth.post('/register',(req,res)=>{
     
+    connection.beginTransaction(function (err) {
+        
+        if(err) throw err;
+
+        
+        var mailito = req.body.email;
+        
+        var sql = "SELECT * FROM usuario WHERE usuario_mail = "+ mysql.escape(mailito);
+        connection.query(sql, function(errr, result, fields){
+
+            if(errr) throw err;
+            
+            
+            
+            if(result == ""){
+                console.log("no hay coincidencia puede seguir");
+                
+        
+                
+               
+                let ssql = 'INSERT INTO usuario SET ?'
+                let post = {
+                    usuario_name: req.body.firstName + " "+req.body.lastName,
+                    usuario_mail:req.body.email,
+                    usuario_password: req.body.password,
+                    usuario_adress: req.body.direccion
+                }
+        
+                connection.query(ssql,post);
+                console.log("hice el insert");
+                var token = jwt.sign(req.body, 'key');
+                res.json({ "user":req.body.firstName, "token": token});
+                connection.end;
+                return;
+               
+            }
+            else{
+                console.log("mail ya registrado, use otro");
+                return;
+            }
+            
+            
+
+
+            
+
+        });
+        connection.end;
+    });
+   connection.end;
+    
+    
+
+    
+    
+
     //
     //1.- Verifica que el usuario nos proporcione información valida
     //
-
+    
 
     //
     //2.- Sí la información enviada por el usuario es valida, entonces guarda su información en la base de datos.
@@ -78,10 +146,8 @@ auth.post('/register',(req,res)=>{
     
     //Esto le envia al usuario un certificado usando una key que le proporcionamos nosootrs,
     //ahorita la key es la palabra 'key', pero la idea que eso sea personalizado para cada usuario
-
-    var token = jwt.sign(req.body, 'key');
-    console.log(req.body);
-    res.json({ "user":req.body.firstName, "token": token});
+    
+    
 });
 
 /*
@@ -98,6 +164,54 @@ tu trabajo es tomar esa información y verificar sí existe en la base de datos 
 
 auth.post('/login',(req,res)=>{
     
+
+    connection.beginTransaction(function (err) {
+        
+        if(err) throw err;
+
+        
+        var mailito = req.body.email;
+        
+        var sql = "SELECT * FROM usuario WHERE usuario_mail = "+ mysql.escape(mailito);
+        connection.query(sql, function(errr, result, fields){
+
+            if(errr) throw err;
+            
+            
+            
+            if(result != ""){
+                console.log(" si existe el usuario");
+                
+                console.log(result[0].usuario_mail);
+                console.log(req.body.email);
+                console.log(result[0].usuario_password);
+                console.log(req.body.password);
+        
+                if((result[0].usuario_mail == req.body.email) && (result[0].usuario_password == req.body.password)){
+                    console.log(" datos correctos");
+                    var token = jwt.sign(req.body, 'key');
+                    console.log(req.body);
+                    res.json({ "user":req.body.email, "token": token});
+                   
+                }else{
+                    console.log("password equivocado")
+                }
+                
+            }
+            else{
+                console.log("usuario no registrado");
+                return;
+            }
+            
+            
+
+
+            
+
+        });
+        connection.end;
+    });
+   connection.end;
      
     //
     //1.- Verifica que el usuario nos proporcione información valida
@@ -125,9 +239,7 @@ auth.post('/login',(req,res)=>{
     //ahorita la key es la palabra 'key', pero la idea que eso sea personalizado para cada usuario
 
     //signs using the auto generated key and the user information
-    var token = jwt.sign(req.body, 'key');
-    console.log(req.body);
-    res.json({ "user":req.body.email, "token": token});
+    
 });
 
 
@@ -140,6 +252,58 @@ Esta API obtiene el id de la ruta y busca el producto de la base de datos al que
 
 shop.get('/Id/:productId',(req, res)=>{
     
+    var prod_id = req.params.productId ;
+    console.log(prod_id);
+    
+    
+    connection.beginTransaction(function (err) {
+        
+        if(err) throw err;
+
+        
+        
+        
+        var sql = "SELECT * FROM stock WHERE product_id = "+ mysql.escape(prod_id);
+        connection.query(sql, function(errr, result, fields){
+
+            if(errr) throw err;
+            
+            if(result.length != 0){
+                var i = result.length;
+
+                res.json({
+                    name:result[0].product_name+" "+ result[0].product_date,
+                    image:result[0].product_image_url,
+                    description:result[0].product_description,
+                    caracteristics:["Es roja","Es chingona","Suena perrón"],
+                    price:result[0].product_price,
+                  });
+            }
+            else{
+                console.log("Articulo no existe");
+                res.json({
+                    name:"Producto No existe",
+                    image:"none",
+                    description:"none",
+                    caracteristics:["nada"],
+                    price:"0",
+                  });
+            }
+            
+           
+            
+            
+
+
+            
+
+        });
+        connection.end;
+    });
+   connection.end;
+
+
+
     //
     //1.- Checa que se haya enviado el Id y que este exista en la base de datos
     //
@@ -150,13 +314,7 @@ shop.get('/Id/:productId',(req, res)=>{
     //
     // console.log(req.params.productId);
  
-     res.json({
-         name:"Guitarra",
-         image:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg",
-         description:"Con la nueva guitarra chingona acá perrona yu know beibi",
-         caracteristics:["Es roja","Es chingona","Suena perrón"],
-         price:"1500"
-       });
+     
  });
 
 
