@@ -6,7 +6,9 @@ var express = require('express');
 var jwt =require('jsonwebtoken');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
-const popupS = require('popups');
+const { json } = require('body-parser');
+
+
 
 
 //
@@ -337,11 +339,43 @@ Es para la vista de "/products"
 
 catalog.get('/all',(req, res)=>{
     
+    var todos= [1000];
+    console.log("Holas");
     //
     //1.- Toma toda la información de la base de datos
     //
-    
+    onnection.beginTransaction(function (err) {
+        
+        if(err) throw err;
 
+        
+        
+        
+        var sql = "SELECT * FROM stock";
+        connection.query(sql, function(errr, result, fields){
+
+         console.log(result);   
+           
+            
+            
+
+
+            
+
+        });
+        connection.end;
+    });
+   connection.end;
+
+
+    res.json({
+        "array":[
+           {name:"Cola",  price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["Piano"]},
+           {name:"Guitarra_Electrica",   price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["Guitarra_Electrica"]},
+           {name:"acustic",price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1",caracteristicas:["acustic"] },
+           {name:"bateria", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["bateria"]}
+        ]
+      });
     //
     //2.- Luego le da el formato del ejemplo a cada objeto JSON formado a partir de los registros de la base de datos
     //
@@ -358,14 +392,7 @@ catalog.get('/all',(req, res)=>{
     LA PROPIEDAD CARACTERISTICAS, ES UN ARRAY DE STRINGS EN DONDE VIENEN KEYWORDS CORRESPONDIENTES A CADA OBJETO
     */
 
-     res.json({
-         "array":[
-            {name:"piano",  price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["Piano"]},
-            {name:"Guitarra_Electrica",   price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["Guitarra_Electrica"]},
-            {name:"acustic",price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1",caracteristicas:["acustic"] },
-            {name:"bateria", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["bateria"]}
-         ]
-       });
+     
  });
 
 
@@ -397,7 +424,62 @@ o en algún otro lugar.
     //
     //1.- Tomas el "term" que haya escrito el usuario en la ruta 
     //
+    var todos= json[1000];
+    console.log("Holas");
+    //
+    //1.- Toma toda la información de la base de datos
+    //
+    connection.beginTransaction(function (err) {
+        
+        if(err) throw err;
+
+
+        
+        
+        var sql = "SELECT * FROM stock";
+        connection.query(sql, function(errr, result, fields){
+
+         console.log(result);   
+           
+         var i= result.length;
+         console.log(i);
+         
+         for (let index = 0; index < i; index++) {
+             
+            
+             todos[index]= ({
+                name: result[index].product_name,
+                ImageUrl:result[index].product_image_url,
+                price: result[index].product_price,
+                productUrl: "http://localhost:4200/product/"+result[index].product_id,
+                caracteristicas: [result[index].product_type]
+             });
+             
+             
+         }
+         
+         
+         
+         console.log(todos);
+
+
+            
+
+        });
+        connection.end;
+    });
+    connection.end;
+     
+   res.json({
+    "array":[
+       {name:"piano",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["Piano"]},
+       {name:"Guitarra_Electrica",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["Guitarra_Electrica"]},
+       {name:"acustic", url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1",caracteristicas:["acustic"] },
+       {name:"bateria",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["bateria"]}
+    ]
     
+  });
+
 
     //
     //2.- Luego checas que registros  contienen ese "term" en la base de datos y lo pasas a un array de JSONs
@@ -418,15 +500,7 @@ o en algún otro lugar.
 
     LA PROPIEDAD CARACTERISTICAS, ES UN ARRAY DE STRINGS EN DONDE VIENEN KEYWORDS CORRESPONDIENTES A CADA OBJETO
     */
-     res.json({
-         "array":[
-            {name:"piano",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["Piano"]},
-            {name:"Guitarra_Electrica",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["Guitarra_Electrica"]},
-            {name:"acustic", url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1",caracteristicas:["acustic"] },
-            {name:"bateria",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["bateria"]}
-         ]
-       });
- });
+});
 
 
 
