@@ -344,7 +344,7 @@ catalog.get('/all',(req, res)=>{
     //
     //1.- Toma toda la información de la base de datos
     //
-    onnection.beginTransaction(function (err) {
+    connection.beginTransaction(function (err) {
         
         if(err) throw err;
 
@@ -451,7 +451,7 @@ o en algún otro lugar.
                 name: result[index].product_name,
                 ImageUrl:result[index].product_image_url,
                 price: result[index].product_price,
-                productUrl: "http://localhost:4200/product/"+result[index].product_id,
+                productUrl: "http://localhost:4200/products/"+result[index].product_id,
                 caracteristicas: [result[index].product_type]
              });
              
