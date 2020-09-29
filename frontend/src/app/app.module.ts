@@ -6,7 +6,7 @@ import { AppComponent }  from './app.component';
 import { MessagesComponent } from './messages.component';
 import {WebService} from './Web.service/web.service';
 import {HttpModule} from '@angular/http';
-import {NewMessagesComponent} from './new-Message.component';
+import {NewMessagesComponent} from './new-message.component';
 import {NavComponent} from './Nav/nav.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -44,6 +44,16 @@ import {LoginPage} from './Pages/loginPage.component';
 
 import {RegisterPage} from './Pages/registerPage.component';
 
+import {CartComponent} from './Pages/cart/cart.component';
+
+import { ProductListComponent } from './Pages/product-detail/product-list.component';
+
+import { ShoppingCartComponent } from './Pages/cart/shopping-cart.component';
+
+import {ProductComponent}  from './Pages/cart/product.component';
+
+import {CartProductComponent} from './Pages/cart/cart-product.component';
+
 var routes =[
   {
   path:'',
@@ -66,6 +76,14 @@ var routes =[
   {
     path:'login',
     component:LoginComponent
+  },
+  {
+    path:'buy-now',
+    component:BuyNowComponent
+  },
+  {
+    path:'cart',
+    component:CartComponent
   }
 ];
 
@@ -92,7 +110,12 @@ var routes =[
       productDetailPage,
       LoginPage,
       LandingPage,
-      RegisterPage
+      RegisterPage,
+      CartComponent,
+      ProductListComponent, 
+      ShoppingCartComponent, 
+      ProductComponent, 
+      CartProductComponent
       ],
       
   //AQUI VAN LOS COMPONENTS IMPORTADOS(librerias)

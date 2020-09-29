@@ -4,6 +4,9 @@ import { MessagesComponent } from './messages.component';
 import { NewMessagesComponent } from './new-message.component';
 import {NavComponent} from './Nav/nav.component';
 
+//Declaracion variable paypal
+declare var paypal;
+
 @Component({
   //SELECTOR es el nombre de mi componente
   selector: 'app-root',
