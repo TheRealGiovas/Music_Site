@@ -46,4 +46,4 @@ drop table stock;
 
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';
 
-insert into stock(product_id, product_name, product_date, product_description, product_type, product_price, product_image_url) values("6","Epiphone SG", "2020", "guitarra bonita y chida", "Guitarra Electrica", 20000, "https://cdn.shopify.com/s/files/1/0183/0329/products/SGG-400PRO.png?v=1593820337" );
+insert into stock(product_id, product_name, product_date, product_description, product_type, product_price, product_image_url) values("9","Epiphone LES PAUL", "2020", "guitarra bonita Y ELEGANTE", "Guitarra Electrica", 20000, "https://cdn.shopify.com/s/files/1/0183/0329/products/SGG-400PRO.png?v=1593820337" );

@@ -136,11 +136,21 @@ export class productsPage {
     }
 
     ngOnInit(){
-      let resp = this.http.get(this.DOMAIN);
-      resp.subscribe((data)=>{
+      if(this.term == null){
+        let resp = this.http.get("http://localhost:63145/products/all");
+        resp.subscribe((data)=>{
          this.products = data.json().array;
          this.productsAll = data.json().array;
-    });
+        });
+      }
+      else{
+        let resp = this.http.get(this.DOMAIN);
+        resp.subscribe((data)=>{
+         this.products = data.json().array;
+         this.productsAll = data.json().array;
+        });
+      }
+      
     
     }
 

@@ -339,25 +339,45 @@ Es para la vista de "/products"
 
 catalog.get('/all',(req, res)=>{
     
-    var todos= [1000];
-    console.log("Holas");
-    //
-    //1.- Toma toda la información de la base de datos
-    //
+    var todos=  [];
     connection.beginTransaction(function (err) {
         
         if(err) throw err;
 
+
+        console.log(req.params.term);
         
-        
-        
-        var sql = "SELECT * FROM stock";
+        var sql = "SELECT * FROM stock" ; 
         connection.query(sql, function(errr, result, fields){
 
          console.log(result);   
            
-            
-            
+         var i= result.length;
+         console.log(i);
+         
+         for (let index = 0; index < i; index++) {
+             
+            console.log(result[index].product_name);
+            console.log(result[index].product_image_url);
+            console.log(result[index].product_price);
+            console.log("http://localhost:4200/product/"+result[index].product_id);
+            console.log(result[index].product_type);
+
+
+             todos[index]= {
+                name: result[index].product_name,
+                ImageUrl:result[index].product_image_url,
+                price: result[index].product_price,
+                productUrl: "http://localhost:4200/product/"+result[index].product_id,
+                caracteristicas: [result[index].product_type]
+             };
+             
+             
+         }
+         
+         
+         res.json({"array": todos});
+         console.log(todos);
 
 
             
@@ -365,17 +385,7 @@ catalog.get('/all',(req, res)=>{
         });
         connection.end;
     });
-   connection.end;
-
-
-    res.json({
-        "array":[
-           {name:"Cola",  price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["Piano"]},
-           {name:"Guitarra_Electrica",   price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["Guitarra_Electrica"]},
-           {name:"acustic",price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1",caracteristicas:["acustic"] },
-           {name:"bateria", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["bateria"]}
-        ]
-      });
+    connection.end;
     //
     //2.- Luego le da el formato del ejemplo a cada objeto JSON formado a partir de los registros de la base de datos
     //
@@ -424,7 +434,7 @@ o en algún otro lugar.
     //
     //1.- Tomas el "term" que haya escrito el usuario en la ruta 
     //
-    var todos= json[1000];
+    var todos= [];
     console.log("Holas");
     //
     //1.- Toma toda la información de la base de datos
@@ -434,9 +444,9 @@ o en algún otro lugar.
         if(err) throw err;
 
 
+        console.log(req.params.term);
         
-        
-        var sql = "SELECT * FROM stock";
+        var sql = "SELECT * FROM stock WHERE product_name =" +mysql.escape(req.params.term); 
         connection.query(sql, function(errr, result, fields){
 
          console.log(result);   
@@ -446,20 +456,26 @@ o en algún otro lugar.
          
          for (let index = 0; index < i; index++) {
              
-            
-             todos[index]= ({
+            console.log(result[index].product_name);
+            console.log(result[index].product_image_url);
+            console.log(result[index].product_price);
+            console.log("http://localhost:4200/product/"+result[index].product_id);
+            console.log(result[index].product_type);
+
+
+             todos[index]= {
                 name: result[index].product_name,
                 ImageUrl:result[index].product_image_url,
                 price: result[index].product_price,
-                productUrl: "http://localhost:4200/products/"+result[index].product_id,
+                productUrl: "http://localhost:4200/product/"+result[index].product_id,
                 caracteristicas: [result[index].product_type]
-             });
+             };
              
              
          }
          
          
-         
+         res.json({"array": todos});
          console.log(todos);
 
 
@@ -470,15 +486,7 @@ o en algún otro lugar.
     });
     connection.end;
      
-   res.json({
-    "array":[
-       {name:"piano",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["Piano"]},
-       {name:"Guitarra_Electrica",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["Guitarra_Electrica"]},
-       {name:"acustic", url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1",caracteristicas:["acustic"] },
-       {name:"bateria",  url:"", price: 10, ImageUrl:"https://www.ecestaticos.com/image/clipping/79776773aab795837282c7d4947abaf7/por-que-nos-parece-que-los-perros-sonrien-una-historia-de-30-000-anos.jpg", productUrl:"http://localhost:4200/product/1", caracteristicas:["bateria"]}
-    ]
-    
-  });
+   
 
 
     //
