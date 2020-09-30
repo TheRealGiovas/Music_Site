@@ -37,9 +37,7 @@ create table pedido(
     foreign key(usuario_mail) references usuario(usuario_mail)
 );
 
-drop table pedido;
-drop table usuario;
-drop table stock;
+
 
 
 
