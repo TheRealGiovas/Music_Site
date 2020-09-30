@@ -13,7 +13,8 @@ import {AuthService} from '../auth.service';
             <button mat-flat-button *ngIf="!auth.isAuthenticated" color="primary" routerLink="/login">Iniciar Sesión/Registrar</button>
 
             <button mat-flat-button  *ngIf="auth.isAuthenticated" color="primary"  (click) = "auth.logout()" >Cerrar Sesión</button>
-
+            
+            <button mat-flat-button *ngIf="!auth.isAuthenticated" color="primary" routerLink="/cart">Carrito</button>
         </div>
     </div>
     `,
