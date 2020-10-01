@@ -446,7 +446,7 @@ o en algún otro lugar.
 
         console.log(req.params.term);
         
-        var sql = "SELECT * FROM stock WHERE product_name =" +mysql.escape(req.params.term); 
+        var sql = "SELECT * FROM stock WHERE product_name Like" +mysql.escape(req.params.term); 
         connection.query(sql, function(errr, result, fields){
 
          console.log(result);   
