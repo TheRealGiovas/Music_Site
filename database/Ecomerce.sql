@@ -45,3 +45,4 @@ create table pedido(
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';
 
 insert into stock(product_id, product_name, product_date, product_description, product_type, product_price, product_image_url) values("9","Epiphone LES PAUL", "2020", "guitarra bonita Y ELEGANTE", "Guitarra Electrica", 20000, "https://cdn.shopify.com/s/files/1/0183/0329/products/SGG-400PRO.png?v=1593820337" );
+insert into stock(product_id, product_name, product_date, product_description, product_type, product_price, product_image_url) values("2","Gretsch Signature", "2020", "Guitarra Signature, de alta calidad", "Guitarra Electrica", 20000, "https://images.equipboard.com/uploads/item/image/17790/gretsch-g6126tcc-chris-cheney-signature-model-xl.jpg" );
