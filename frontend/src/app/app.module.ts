@@ -79,10 +79,6 @@ var routes =[
     component:LoginComponent
   },
   {
-    path:'buy-now',
-    component:BuyNowComponent
-  },
-  {
     path:'cart',
     component:CartComponent
   }
@@ -114,9 +110,7 @@ var routes =[
       RegisterPage,
       CartComponent,
       ProductListComponent, 
-      ShoppingCartComponent, 
-      ProductComponent, 
-      CartProductComponent
+      CartComponent, 
       ],
       
   //AQUI VAN LOS COMPONENTS IMPORTADOS(librerias)
