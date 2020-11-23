@@ -9,34 +9,22 @@ declare var paypal;
 })
 export class CartComponent implements OnInit {
   @ViewChild('paypal',{}) paypalElement: ElementRef;
-  cartProductList = [];
-  total:0
 
-  getTotal(product) { 
-    this.total += product.price;
-  }
+  cart = JSON.parse(localStorage.getItem("cart"));
 
-  addProductToCart(product) {
-    const productExistInCart = this.cartProductList.find(({name}) => name === product.name); // find product by name
-    if (!productExistInCart) {
-      this.cartProductList.push({...product, num:1}); // enhance "porduct" opject with "num" property
-      return;
-    }
-    productExistInCart.num += 1;
-  }
-   removeProduct(product) {
-    this.cartProductList = this.cartProductList.filter(({name}) => name !== product.name)
-  }
   paidFor = false;
+  total = 0;
   ngOnInit() {
-    this.cartProductList.forEach(this.getTotal);
+    this.cart.forEach(product => {
+      this.total += product.price;
+    });
     paypal
       .Buttons({
         createOrder: (data, actions) => {
           return actions.order.create({
             purchase_units: [
               {
-                description: "Pago de pedido",
+                description: "Pago FM's",
                 amount: {
                   value: this.total
                 }
@@ -56,7 +44,4 @@ export class CartComponent implements OnInit {
       .render(this.paypalElement.nativeElement);
   }
 
-  addElement(json){
-    this.total = this.total + json.price
-  }
 }

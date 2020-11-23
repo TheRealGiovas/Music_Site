@@ -53,6 +53,7 @@ import { ShoppingCartComponent } from './Pages/cart/shopping-cart.component';
 import {ProductComponent}  from './Pages/cart/product.component';
 
 import {CartProductComponent} from './Pages/cart/cart-product.component';
+import { BuyNowComponent } from './Pages/buy-now/buy-now.component';
 
 var routes =[
   {

@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { OnInit, ViewChild, ElementRef } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Http} from '@angular/http';
 import { JsonPipe } from '@angular/common';
+
+declare var paypal;
 
 @Component({
   selector: 'product-detail-page',
@@ -10,6 +13,18 @@ import { JsonPipe } from '@angular/common';
 })
  
 export class productDetailPage{
+
+  @ViewChild('paypal',{}) paypalElement: ElementRef;
+  
+  cart =[]
+
+  add(){
+    if(localStorage.getItem("cart") != null){
+      this.cart = JSON.parse(localStorage.getItem("cart"));
+    }
+    this.cart.push(this.product);
+    localStorage.setItem("cart",JSON.stringify(this.cart));
+  }
   
   id = this.r.snapshot.paramMap.get('id');
 
@@ -37,6 +52,29 @@ export class productDetailPage{
     ngOnInit(){
       let resp = this.http.get(this.DOMAIN+"/Id/"+this.id);
       resp.subscribe((data)=> this.product = data.json());
+      paypal
+      .Buttons({
+        createOrder: (data, actions) => {
+          return actions.order.create({
+            purchase_units: [
+              {
+                description: this.product.name,
+                amount: {
+                  value: parseFloat(this.product.price)
+                }
+              }
+            ]
+          });
+        },
+        onApprove: async (data, actions) => {
+          const order = await actions.order.capture();
+          console.log(order);
+        },
+        onError: err => {
+          console.log(err);
+        }
+      })
+      .render(this.paypalElement.nativeElement);
     }
 
     

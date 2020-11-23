@@ -2,14 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Carrito</title>
+  <title>Comprar Ahora</title>
 </head>
 <body>
   <div *ngIf="!paidFor">
     <h1></h1>
     <h1>Carrito</h1>
     <h1></h1>
-    <shopping-cart [products]="cartProductList" (productRemoved)="removeProduct($event)"></shopping-cart>
+    <mat-grid-tile 
+    *ngFor="let product of this.cart">
+            <div>
+                
+                    <img class="tile-image"
+                    width="70%"
+                    height="50%"
+                    src={{product.ImageUrl}}/>
+                <br>
+                    <div class="product-info">
+                        <a href={{product.productUrl}} class="product-link"><b>{{product.name}}</b></a> <b>{{ product.price}}</b>
+                        
+                    </div>
+            </div>
+    
+        </mat-grid-tile>
     <h2>Total: ${{ total }}</h2>
     <h3>Pagar</h3>
   </div>

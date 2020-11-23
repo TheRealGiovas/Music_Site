@@ -21,11 +21,11 @@
             <br>
             <br>
             <div class="Comprar">
-                <button mat-raised-button color="warn" href="https://www.google.com/" routerLink="/buy-now" (click) = "addProductToCart(product)">Comprar</button>
-            </div>  
-                <br>
-            <div class="Comprar">
-                <button mat-raised-button color="accent" href="https://www.google.com/" routerLink="/cart">Agregar al Carrito</button>
+                <button mat-raised-button color="accent" href="https://www.google.com/" (click) = "add()">Agregar al Carrito</button>
+            </div>
+            <br>
+            <div #paypal>
+                <h4>Comprar ahora</h4>
             </div>
 
         </div>
