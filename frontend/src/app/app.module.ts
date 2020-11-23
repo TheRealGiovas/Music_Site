@@ -46,7 +46,6 @@ import {RegisterPage} from './Pages/registerPage.component';
 
 import {CartComponent} from './Pages/cart/cart.component';
 
-import { ProductListComponent } from './Pages/product-detail/product-list.component';
 
 var routes =[
   {
@@ -102,8 +101,7 @@ var routes =[
       LandingPage,
       RegisterPage,
       CartComponent,
-      ProductListComponent, 
-      CartComponent, 
+      CartComponent
       ],
       
   //AQUI VAN LOS COMPONENTS IMPORTADOS(librerias)
